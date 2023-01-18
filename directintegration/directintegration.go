@@ -1,8 +1,12 @@
 package directintegration
 
-import "math"
+import (
+	"math"
 
-func Nigam(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []float64) {
+	"github.com/takatoh/msdofs/response"
+)
+
+func Nigam(h, w, dt float64, nn int, ddy []float64) []*response.Response {
 	w2 := w * w
 	hw := h * w
 	wd := w * math.Sqrt(1.0-h*h)
@@ -27,14 +31,11 @@ func Nigam(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []flo
 	b21 := (hw*s2 - wd*c2) / wdt
 	b22 := (hw*s3 - wd*c3) / wdt
 
-	var acc []float64
-	var vel []float64
-	var dis []float64
-	acc = append(acc, 2.0*h*w*ddy[0]*dt)
-	vel = append(vel, -ddy[0]*dt)
-	dis = append(dis, 0.0)
-	dx := vel[0]
+	var resp []*response.Response
+	ddx := 2.0 * h * w * ddy[0] * dt
+	dx := -ddy[0] * dt
 	x := 0.0
+	resp = append(resp, response.NewResponse(ddx, dx, x))
 
 	for m := 1; m < nn; m++ {
 		dxf := dx
@@ -44,10 +45,8 @@ func Nigam(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []flo
 		x = a12*dxf + a11*xf + b12*ddym + b11*ddyf
 		dx := a22*dxf + a21*xf + b22*ddym + b21*ddyf
 		ddx := -2.0*hw*dx - w2*x
-		acc = append(acc, ddx)
-		vel = append(vel, dx)
-		dis = append(dis, x)
+		resp = append(resp, response.NewResponse(ddx, dx, x))
 	}
 
-	return acc, vel, dis
+	return resp
 }
