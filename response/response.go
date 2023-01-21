@@ -1,15 +1,15 @@
 package response
 
 type Response struct {
-	Sa float64
-	Sv float64
-	Sd float64
+	Acc float64
+	Vel float64
+	Dis float64
 }
 
-func NewResponse(sa, sv, sd float64) *Response {
+func NewResponse(acc, vel, dis float64) *Response {
 	p := new(Response)
-	p.Sa = sa
-	p.Sv = sv
-	p.Sd = sd
+	p.Acc = acc
+	p.Vel = vel
+	p.Dis = dis
 	return p
 }
