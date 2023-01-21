@@ -18,7 +18,7 @@ func LinearAcc(h, w, dt float64, nn int, ddy []float64) []*response.Response {
 	for m := 1; m < nn; m++ {
 		ddx2 = -(ddy[m] + b*x + c*dx + d*ddx) / a
 		dx2 = dx + (ddx+ddx2)*dt/2.0
-		x2 = x + dx*dt + (2.0*ddx+ddx2)*dt*dt
+		x2 = x + dx*dt + (2.0*ddx+ddx2)*dt*dt/6.0
 		resp = append(resp, response.NewResponse(ddx2+ddy[m], dx2, x2))
 		ddx, dx, x = ddx2, dx2, x2
 	}
