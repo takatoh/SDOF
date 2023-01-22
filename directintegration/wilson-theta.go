@@ -1,6 +1,6 @@
 package directintegration
 
-import "github.com/takatoh/msdofs/response"
+import "github.com/takatoh/sdof/response"
 
 const (
 	Theta = 1.4

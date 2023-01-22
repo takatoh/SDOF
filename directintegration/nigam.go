@@ -3,7 +3,7 @@ package directintegration
 import (
 	"math"
 
-	"github.com/takatoh/msdofs/response"
+	"github.com/takatoh/sdof/response"
 )
 
 func Nigam(h, w, dt float64, nn int, ddy []float64) []*response.Response {

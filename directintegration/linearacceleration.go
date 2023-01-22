@@ -1,6 +1,6 @@
 package directintegration
 
-import "github.com/takatoh/msdofs/response"
+import "github.com/takatoh/sdof/response"
 
 func LinearAcc(h, w, dt float64, nn int, ddy []float64) []*response.Response {
 	a := 1.0 + h*w*dt + (w*w*dt*dt)/6.0
