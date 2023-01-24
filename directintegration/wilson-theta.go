@@ -13,7 +13,9 @@ func WilsonTheta(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64,
 	cnume2 := hw * w2 * tdt
 	cnume3 := tdt*hw*tdt/2.0 + w2*tdt*tdt/3.0
 
-	var ddx, dx, x []float64
+	ddx := make([]float64, 0)
+	dx := make([]float64, 0)
+	x := make([]float64, 0)
 	ddx = append(ddx, 0.0)
 	dx = append(dx, 0.0)
 	x = append(x, 0.0)
