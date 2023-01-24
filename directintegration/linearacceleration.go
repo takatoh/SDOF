@@ -6,9 +6,7 @@ func LinearAcc(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, [
 	c := 2.0*h*w + w*w*dt
 	d := h*w*dt + (w*w*dt*dt)/3.0
 
-	var ddx []float64
-	var dx []float64
-	var x []float64
+	var ddx, dx, x []float64
 	ddx = append(ddx, -ddy[0])
 	dx = append(dx, 0.0)
 	x = append(x, 0.0)
