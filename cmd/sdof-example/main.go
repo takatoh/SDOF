@@ -10,6 +10,17 @@ import (
 )
 
 func main() {
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr,
+			`Usage:
+  %s [options] <wavefile.csv>
+
+Options:
+`, os.Args[0])
+		flag.PrintDefaults()
+	}
+	opt_omega := flag.Float64("omega", 1.0, "Specify sircular frequency.")
+	opt_h := flag.Float64("h", 0.05, "Specify attenuation constant.")
 	flag.Parse()
 
 	filename := flag.Arg(0)
@@ -26,8 +37,8 @@ func main() {
 	n := wave.NData()
 	dt := wave.DT()
 	data := wave.Data
-	w := 1.0
-	h := 0.05
+	w := *opt_omega
+	h := *opt_h
 
 	acc, _, _ := directintegration.WilsonTheta(w, h, dt, n, data)
 	t := 0.0
