@@ -41,6 +41,7 @@ Options:
 	h := *opt_h
 
 	acc, _, _ := directintegration.WilsonTheta(w, h, dt, n, data)
+	fmt.Println("Time,Acc")
 	t := 0.0
 	for i := 0; i < len(acc); i++ {
 		fmt.Printf("%f,%f\n", t, acc[i])
