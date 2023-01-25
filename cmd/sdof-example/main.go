@@ -40,7 +40,7 @@ Options:
 	w := *opt_omega
 	h := *opt_h
 
-	acc, _, _ := directintegration.WilsonTheta(w, h, dt, n, data)
+	acc, _, _ := directintegration.WilsonTheta(h, w, dt, n, data)
 	fmt.Println("Time,Acc")
 	t := 0.0
 	for i := 0; i < len(acc); i++ {
