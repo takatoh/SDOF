@@ -20,15 +20,15 @@ func WilsonTheta(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64,
 	dx = append(dx, 0.0)
 	x = append(x, 0.0)
 
+	a0 := ddx[0]
 	for m := 1; m < nn-1; m++ {
 		f := (Theta-1.0)*ddy[m] - Theta*ddy[m+1]
-		ath := (f - w2*x[m-1] - cnume2*dx[m-1] - cnume3*ddx[m-1]) / cdenom
-		ddx2 := ((Theta-1.0)*ddx[m-1] + ath) / Theta
-		dx2 := dx[m-1] + (ddx[m-1]+ddx2)*dt/2.0
-		x2 := x[m-1] + dx[m-1]*dt + (2.0*ddx[m-1]+ddx2)*dt*dt/6.0
-		ddx = append(ddx, ddx2+ddy[m])
-		dx = append(dx, dx2)
-		x = append(x, x2)
+		ath := (f - w2*x[m-1] - cnume2*dx[m-1] - cnume3*a0) / cdenom
+		a1 := ((Theta-1.0)*a0 + ath) / Theta
+		x = append(x, x[m-1]+dt*dx[m-1]+(2.0*a0+a1)*dt*dt/6.0)
+		dx = append(dx, dx[m-1]+(a0+a1)*dt/2.0)
+		ddx = append(ddx, a1+ddy[m])
+		a0 = a1
 	}
 
 	return ddx, dx, x
