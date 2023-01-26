@@ -48,3 +48,24 @@ Options:
 		t = t + dt
 	}
 }
+
+func interpolate(zin []float64, ndiv int) []float64 {
+	var zinc float64
+	nin := len(zin)
+	ndivf := float64(ndiv)
+	z := make([]float64, 0)
+	k := 0
+	z = append(z, 0.0)
+	for i := 0; i < nin; i++ {
+		if i == 0 {
+			zinc = zin[i] / ndivf
+		} else {
+			zinc = (zin[i] - zin[i-1]) / ndivf
+		}
+		for j := 0; j < ndiv; j++ {
+			z = append(z, z[k]+zinc)
+			k++
+		}
+	}
+	return z
+}
