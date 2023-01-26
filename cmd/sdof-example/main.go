@@ -33,17 +33,19 @@ Options:
 		os.Exit(1)
 	}
 
+	ndiv := 10
 	wave := waves[0]
-	n := wave.NData()
-	dt := wave.DT()
-	data := wave.Data
+	data := interpolate(wave.Data, ndiv)
+	n := len(data)
+	dt := wave.DT() / float64(ndiv)
 	w := *opt_omega
 	h := *opt_h
 
 	acc, _, _ := directintegration.WilsonTheta(h, w, dt, n, data)
 	fmt.Println("Time,Acc")
 	t := 0.0
-	for i := 0; i < len(acc); i++ {
+	dt = wave.DT()
+	for i := 0; i < len(acc); i += ndiv {
 		fmt.Printf("%f,%f\n", t, acc[i])
 		t = t + dt
 	}
