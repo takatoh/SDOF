@@ -29,7 +29,9 @@ func Nigam(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []flo
 	b21 := (hw*s2 - wd*c2) / wdt
 	b22 := (hw*s3 - wd*c3) / wdt
 
-	var ddx, dx, x []float64
+	ddx := make([]float64, 0)
+	dx := make([]float64, 0)
+	x := make([]float64, 0)
 	ddx = append(ddx, 2.0*h*w*ddy[0]*dt)
 	dx = append(dx, -ddy[0]*dt)
 	x = append(x, 0.0)
