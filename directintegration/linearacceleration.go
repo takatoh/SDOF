@@ -1,10 +1,10 @@
 package directintegration
 
 func LinearAcc(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []float64) {
-	a := 1.0 + h*w*dt + (w*w*dt*dt)/6.0
+	a := 1.0 + h*w*dt + w*w*dt*dt/6.0
 	b := w * w
 	c := 2.0*h*w + w*w*dt
-	d := h*w*dt + (w*w*dt*dt)/3.0
+	d := h*w*dt + w*w*dt*dt/3.0
 
 	ddx := make([]float64, 0)
 	dx := make([]float64, 0)
