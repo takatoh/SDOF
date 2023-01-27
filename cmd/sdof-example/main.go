@@ -4,12 +4,19 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/takatoh/sdof/directintegration"
 	"github.com/takatoh/seismicwave"
 )
 
 func main() {
+	methods := []string{
+		"wilson-theta",
+		"linear",
+		"nigam",
+	}
+
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr,
 			`Usage:
@@ -21,8 +28,14 @@ Options:
 	}
 	opt_omega := flag.Float64("omega", 1.0, "Specify sircular frequency.")
 	opt_h := flag.Float64("h", 0.05, "Specify attenuation constant.")
+	opt_method := flag.String("method", "wilson-theta", "Specify integration method. default to wilson-theta.")
 	flag.Parse()
 
+	if !(contains(methods, *opt_method)) {
+		fmt.Fprintf(os.Stderr, "Error: Unsupported integration method: %s\n", *opt_method)
+		fmt.Fprintf(os.Stderr, "Available methods are: %s\n", strings.Join(methods, ", "))
+		os.Exit(1)
+	}
 	filename := flag.Arg(0)
 
 	var waves []*seismicwave.Wave
@@ -41,7 +54,14 @@ Options:
 	w := *opt_omega
 	h := *opt_h
 
-	acc, _, _ := directintegration.WilsonTheta(h, w, dt, n, data)
+	var acc []float64
+	if *opt_method == "wilson-theta" {
+		acc, _, _ = directintegration.WilsonTheta(h, w, dt, n, data)
+	} else if *opt_method == "linear" {
+		acc, _, _ = directintegration.LinearAcc(h, w, dt, n, data)
+	} else if *opt_method == "nigam" {
+		acc, _, _ = directintegration.Nigam(h, w, dt, n, data)
+	}
 	fmt.Println("Time,Acc")
 	t := 0.0
 	dt = wave.DT()
@@ -70,4 +90,13 @@ func interpolate(zin []float64, ndiv int) []float64 {
 		}
 	}
 	return z
+}
+
+func contains(elem []string, v string) bool {
+	for _, s := range elem {
+		if v == s {
+			return true
+		}
+	}
+	return false
 }
