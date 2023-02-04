@@ -29,7 +29,7 @@ Options:
 	}
 	opt_omega := flag.Float64("omega", 1.0, "Specify sircular frequency.")
 	opt_h := flag.Float64("h", 0.05, "Specify attenuation constant.")
-	opt_method := flag.String("method", "wilson-theta", "Specify integration method. default to wilson-theta.")
+	opt_method := flag.String("method", "wilson-theta", "Specify integration method.")
 	flag.Parse()
 
 	if !(contains(methods, *opt_method)) {
