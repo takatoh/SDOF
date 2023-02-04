@@ -13,6 +13,7 @@ import (
 func main() {
 	methods := []string{
 		"wilson-theta",
+		"average",
 		"linear",
 		"nigam",
 	}
@@ -57,6 +58,8 @@ Options:
 	var acc []float64
 	if *opt_method == "wilson-theta" {
 		acc, _, _ = directintegration.WilsonTheta(h, w, dt, n, data)
+	} else if *opt_method == "average" {
+		acc, _, _ = directintegration.AverageAcc(h, w, dt, n, data)
 	} else if *opt_method == "linear" {
 		acc, _, _ = directintegration.LinearAcc(h, w, dt, n, data)
 	} else if *opt_method == "nigam" {
