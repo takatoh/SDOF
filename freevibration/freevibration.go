@@ -7,7 +7,7 @@ func NaturalCircularFreqency(m, k float64) float64 {
 }
 
 func NaturalFreqency(m, k float64) float64 {
-	return math.Sqrt(m/k) / (2.0 * math.Pi)
+	return math.Sqrt(k/m) / (2.0 * math.Pi)
 }
 
 func NaturalPeriod(m, k float64) float64 {
