@@ -1,7 +1,7 @@
 module github.com/takatoh/sdof
 
-go 1.19
+go 1.20
 
-require github.com/takatoh/seismicwave v1.0.0
+require github.com/takatoh/seismicwave v1.2.0
 
 require github.com/BurntSushi/toml v0.4.1 // indirect
