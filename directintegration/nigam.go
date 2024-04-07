@@ -29,21 +29,21 @@ func Nigam(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []flo
 	b21 := (hw*s2 - wd*c2) / wdt
 	b22 := (hw*s3 - wd*c3) / wdt
 
-	ddx := make([]float64, 0)
-	dx := make([]float64, 0)
-	x := make([]float64, 0)
-	ddx = append(ddx, 2.0*h*w*ddy[0]*dt)
-	dx = append(dx, -ddy[0]*dt)
-	x = append(x, 0.0)
+	ddx := make([]float64, nn)
+	dx := make([]float64, nn)
+	x := make([]float64, nn)
+	ddx[0] = 2.0 * h * w * ddy[0] * dt
+	dx[0] = -ddy[0] * dt
+	x[0] = 0.0
 
 	for m := 1; m < nn; m++ {
 		dxf := dx[m-1]
 		xf := x[m-1]
 		ddym := ddy[m]
 		ddyf := ddy[m-1]
-		x = append(x, a12*dxf+a11*xf+b12*ddym+b11*ddyf)
-		dx = append(dx, a22*dxf+a21*xf+b22*ddym+b21*ddyf)
-		ddx = append(ddx, -2.0*hw*dx[m]-w2*x[m])
+		x[m] = a12*dxf + a11*xf + b12*ddym + b11*ddyf
+		dx[m] = a22*dxf + a21*xf + b22*ddym + b21*ddyf
+		ddx[m] = -2.0*hw*dx[m] - w2*x[m]
 	}
 
 	return ddx, dx, x
