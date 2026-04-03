@@ -16,6 +16,7 @@ func main() {
 		"average",
 		"linear",
 		"nigam",
+		"runge-kutta",
 	}
 
 	flag.Usage = func() {
@@ -64,6 +65,8 @@ Options:
 		acc, _, _ = directintegration.LinearAcc(h, w, dt, n, data)
 	} else if *opt_method == "nigam" {
 		acc, _, _ = directintegration.Nigam(h, w, dt, n, data)
+	} else if *opt_method == "runge-kutta" {
+		acc, _, _ = directintegration.RK4(h, w, dt, n, data)
 	}
 	fmt.Println("Time,Acc")
 	t := 0.0
