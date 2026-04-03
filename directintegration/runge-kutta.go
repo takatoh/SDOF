@@ -12,7 +12,7 @@ func RK4(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []float
 	var f1, f2, fm float64
 	var x1, x2, dx1, dx2 float64
 	var racc, rvel, rdis float64
-	var kx1, kx2, kx3, kx4, kdx1, kdx2, ky3, ky4 float64
+	var kx1, kx2, kx3, kx4, kdx1, kdx2, kdx3, kdx4 float64
 	racc = 0.0
 	rvel = 0.0
 	rdis = 0.0
@@ -29,10 +29,10 @@ func RK4(h, w, dt float64, nn int, ddy []float64) ([]float64, []float64, []float
 
 		kx1, kdx1 = func4rk(am, ac, ak, f1, x1, dx1)
 		kx2, kdx2 = func4rk(am, ac, ak, fm, x1+dt*kx1/2.0, dx1+dt*kdx1/2.0)
-		kx3, ky3 = func4rk(am, ac, ak, fm, x1+dt*kx2/2.0, dx1+dt*kdx2/2.0)
-		kx4, ky4 = func4rk(am, ac, ak, f2, x1+dt*kx3, dx1+dt*ky3)
+		kx3, kdx3 = func4rk(am, ac, ak, fm, x1+dt*kx2/2.0, dx1+dt*kdx2/2.0)
+		kx4, kdx4 = func4rk(am, ac, ak, f2, x1+dt*kx3, dx1+dt*kdx3)
 		x2 = x1 + dt*(kx1+2.0*kx2+2.0*kx3+kx4)/6.0
-		dx2 = dx1 + dt*(kdx1+2.0*kdx2+2.0*ky3+ky4)/6.0
+		dx2 = dx1 + dt*(kdx1+2.0*kdx2+2.0*kdx3+kdx4)/6.0
 
 		racc = f2/am - ac/am*dx2 - ak/am*x2
 		rvel = dx2
