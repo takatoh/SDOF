@@ -44,7 +44,7 @@ t_d := freevibration.DampedNaturalPeriod(omega, h)
 - 平均加速度法
 - 線形加速度法
 - ニガムの方法
-- ウィルソンのΘ法
+- ウィルソンのθ法
 - ルンゲ-クッタ法（RK4）
 
 いずれの関数も次の5つの引数をとります。
@@ -79,7 +79,7 @@ acc, vel, dis := directintegration.LinearAcc(h, w, dt, nn, ddy)
 acc, vel, dis := directintegration.NigamAcc(h, w, dt, nn, ddy)
 ```
 
-### ウィルソンのΘ法
+### ウィルソンのθ法
 ```go
 acc, vel, dis := directintegration.WilsonTheta(h, w, dt, nn, ddy)
 ```
