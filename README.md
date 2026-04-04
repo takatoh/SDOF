@@ -76,7 +76,7 @@ acc, vel, dis := directintegration.LinearAcc(h, w, dt, nn, ddy)
 
 ### ニガムの方法
 ```go
-acc, vel, dis := directintegration.NigamAcc(h, w, dt, nn, ddy)
+acc, vel, dis := directintegration.Nigam(h, w, dt, nn, ddy)
 ```
 
 ### ウィルソンのθ法
