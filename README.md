@@ -4,7 +4,7 @@
 
 ## Installation
 
-```
+```shell
 > go install github.com/takatoh/SODF
 ```
 
@@ -13,27 +13,27 @@
 自由振動の基本的な関数は `freevibration` サブパッケージにまとめられています。
 
 ### 固有円振動数
-```
+```go
 omega := freevibration.NaturalCircularFrequency(m, k)
 ```
 
 ### 固有振動数
-```
+```go
 f := freevibration.NaturalFrequency(m, k)
 ```
 
 ### 固有周期
-```
+```go
 t := freevibration.NaturalPeriod(m, k)
 ```
 
 ### 減衰固有円振動数
-```
+```go
 omega_d := freevibration.dampedNaturalCircularFrequency(omega, h)
 ```
 
 ### 減衰固有周期
-```
+```go
 t_d := freevibration.DampedNaturalPeriod(omega, h)
 ```
 
@@ -62,26 +62,26 @@ t_d := freevibration.DampedNaturalPeriod(omega, h)
 - 相対変位
 
 ### 平均加速度法
-```
+```go
 acc, vel, dis := directintegration.AverageAcc(h, w, dt, nn, ddy)
 ```
 
 ### 線形加速度法
-```
+```go
 acc, vel, dis := directintegration.LinearAcc(h, w, dt, nn, ddy)
 ```
 
 ### ニガムの方法
-```
+```go
 acc, vel, dis := directintegration.NigamAcc(h, w, dt, nn, ddy)
 ```
 
 ### ウィルソンのΘ法
-```
+```go
 acc, vel, dis := directintegration.WilsonTheta(h, w, dt, nn, ddy)
 ```
 
 ### （4次の）ルンゲ-クッタ法（RK4）
-```
+```go
 acc, vel, dis := directintegration.RK4(h, w, dt, nn, ddy)
 ```
